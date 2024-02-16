@@ -50,10 +50,21 @@ app.get('/produit/famille/:famille', (req, res) => {
     res.json(produits)
 });
 app.put('/produit/:id', (req, res) => {
+    const file = `./data/${req.params.id}.txt`
+    if(!fs.existsSync(file))
+        res.status(404).send('ID produit Incorrect')
 
+        fs.unlinkSync(file)
+        fs.writeFileSync(file, JSON.stringify(req.body));
+        res.end();
 });
 app.delete('/produit/:id', (req, res) => {
+    const file = `./data/${req.params.id}.txt`
+    if(!fs.existsSync(file))
+        res.status(404).send('ID produit Incorrect')
 
+    fs.unlinkSync(file)
+    res.end();
 });
 
 
