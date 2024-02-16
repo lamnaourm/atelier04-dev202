@@ -30,13 +30,30 @@ app.get('/produit/all', (req, res) => {
 })
 
 app.get('/produit/id/:id', (req, res) => {
+    const file = `./data/${req.params.id}.txt`
+    if(!fs.existsSync(file))
+        res.status(404).send('ID produit Incorrect')
     
+    const produit = fs.readFileSync(file);
+    res.status(202).json(JSON.parse(produit))
 });
+
 app.get('/produit/famille/:famille', (req, res) => {
+    const filenames = fs.readdirSync('./data')
+    var produits = []
+    filenames.forEach (name => {
+        const data = readFileSync(`./data/${name}`)
+        const produit = JSON.parse(data)
+        if(produit.famille == req.params.famille)
+            produits.push({id:name.split('.')[0], ...produit})
+    })
+    res.json(produits)
 });
 app.put('/produit/:id', (req, res) => {
+
 });
 app.delete('/produit/:id', (req, res) => {
+
 });
 
 
