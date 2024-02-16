@@ -29,6 +29,16 @@ app.get('/produit/all', (req, res) => {
     res.json(produits)
 })
 
+app.get('/produit/id/:id', (req, res) => {
+    
+});
+app.get('/produit/famille/:famille', (req, res) => {
+});
+app.put('/produit/:id', (req, res) => {
+});
+app.delete('/produit/:id', (req, res) => {
+});
+
 
 app.listen(port, (err) => {
     if(!err)
